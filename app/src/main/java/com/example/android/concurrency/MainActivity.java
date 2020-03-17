@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             for (String value :
                     strings) {
                 Log.i(TAG, "doInBackground: " + value);
+                publishProgress(value);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -86,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             return null;
+        }
+
+        //TODO: Override onProgressUpdate which runs on the main thread
+        @Override
+        protected void onProgressUpdate(String... values) {
+            log(values[0]);
         }
     }
 
