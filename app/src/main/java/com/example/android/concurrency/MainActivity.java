@@ -1,6 +1,7 @@
 package com.example.android.concurrency;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,32 @@ public class MainActivity extends AppCompatActivity {
 
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
+
         log("Running code");
+        displayProgressBar(true);
+
+        //TODO: Runnable interface. Here is an anonymous Runnable implementation
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+//                Log.i(TAG, "run: runnable complete");
+//                displayProgressBar(false);
+//                //TODO: blocking call running on the main thread, UI will be unresponsive as a result
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+            }
+        };
+
+        //TODO: Handler class instance to speed up UI response
+        Handler handler = new Handler();
+        //postDelayed() releases the MainThread for the stated amount of time
+        handler.postDelayed(runnable, 3000);
+
+
+
     }
 
     //  Clear the output, called from the onClick event in the layout file
